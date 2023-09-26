@@ -8,11 +8,7 @@ This browser based web application to ...
 List team members and/or short bio's here... 
 * Matthew
 * Amal Allaham
-<<<<<<< HEAD
 * Inderjeet Singh
-=======
-* alsdkfjkls
->>>>>>> 8b61cfc67e9db49f691afd59c13fe7059a4b24db
 * ...
 	
 ## 3. Technologies and Resources Used
