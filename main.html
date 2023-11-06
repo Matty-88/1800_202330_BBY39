@@ -86,21 +86,37 @@
     </div>
   </nav>
 
-  <div class="position-relative overflow-hidden p-3 p-md-5 text-center bg-dark">
-    <div class="col-md-5 p-lg-5 mx-auto my-5">
-      <h1 class="display-4 font-weight-bold text-light">Money Mate</h1>
-      <p class="lead font-weight-normal text-light">
-        Our team BBY39 is developing a web application to help a group of
-        people who need to save money to achieve their financial goals with
-        competition between them .
-      </p>
-      <a class="btn btn-secondary text-light" href="#">Coming soon</a>
+  <div class="container">
+    <h1>Some popular hikes</h1>
+    <!-- Here is the container for cards  -->
+    <div class="container">
+        <div id="hikes-go-here" class="row row-cols-auto">
+        </div>
     </div>
-    <div class="product-device box-shadow d-none d-md-block"></div>
-    <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
-  </div>
+</div>
 
-  <div class="card m-3 p-3">
+<!-- our own footer goes here-->
+<nav id="footerPlaceholder"></nav>
+
+<!-- Templates for general use, not displayed -->
+<template id="hikeCardTemplate">
+    <div class="card py-2 mx-2" style="width: 18rem">
+        <img class="card-image card-img-top" src=" ..." alt="..." />
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-length">placeholder</p>
+            <br />
+            <p class="card-text">
+                Some quick example text to build on the card title and make up the
+                bulk of the card's content.
+            </p>
+            <a class="btn btn-primary card-href">Read more ...</a>
+        </div>
+    </div>
+</template>
+
+
+  <!-- <div class="card m-3 p-3">
     <div class="card-body">
       <p>Contact us</p>
       <form>
@@ -114,7 +130,7 @@
         </div>
       </form>
     </div>
-  </div>
+  </div> -->
 
   <footer class="container py-5">
     <div class="row">
@@ -158,7 +174,7 @@
   <!---------------------------------------------->
   <script src="./scripts/firebaseAPI_BBY39.js"></script>
   <script src="./scripts/skeleton.js"></script>
-  <script src="./scripts/authentication.js"></script>
+  <script src="./scripts/main.js"></script>
 
   <!-- Link to scripts of your own -->
   <!-- <script src="./scripts/script.js"></script> -->
