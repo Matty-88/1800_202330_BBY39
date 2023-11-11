@@ -11,7 +11,6 @@
   --light-pink: #fdecf7;
 }
 
-
 .primary-background {
   background-color: var(--pink);
 }
@@ -36,4 +35,18 @@
 .responsive {
   width: 100%;
   height: auto;
+}
+
+footer {
+  background-color: var(--primary-color);
+  padding: 1.5rem;
+  border-top-left-radius: 4000px 150px;
+  border-top-right-radius: 4000px 150px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.font-size-17pt {
+  font-size: 17pt;
 }
