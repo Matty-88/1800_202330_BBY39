@@ -1,7 +1,7 @@
 /*-------------------------------------
- * customize material design icon sizes 
- *-------------------------------------
- */
+* customize material design icon sizes 
+*-------------------------------------
+*/
 
 :root {
   --primary-color: #191a24;
@@ -9,6 +9,17 @@
   --danger-color: #fc5c5c;
   --pink: #fbcee3;
   --light-pink: #fdecf7;
+}
+
+ @font-face {
+  font-family: regular;
+  src: url(/assets/fonts/Montserrat/static/Montserrat-Bold.ttf);
+}
+
+
+body {
+  font-family: regular;
+  color: var(--primary-color);
 }
 
 
@@ -36,4 +47,18 @@
 .responsive {
   width: 100%;
   height: auto;
+}
+
+footer {
+  background-color: var(--primary-color);
+  padding: 1.5rem;
+  border-top-left-radius: 4000px 150px;
+  border-top-right-radius: 4000px 150px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.font-size-17pt {
+  font-size: 17pt;
 }
