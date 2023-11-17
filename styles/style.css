@@ -13,12 +13,21 @@
 
 @font-face {
   font-family: regular;
+  src: url(/assets/fonts/Montserrat/static/Montserrat-Regular.ttf);
+}
+
+@font-face {
+  font-family: bold;
   src: url(/assets/fonts/Montserrat/static/Montserrat-Bold.ttf);
 }
 
 body {
   font-family: regular;
   color: var(--primary-color);
+}
+
+.bold {
+  font-family: bold;
 }
 
 h1 {
@@ -82,3 +91,34 @@ footer {
   min-height: 30%;
 }
 
+.avatar-container {
+  width: 60px;
+  position: relative;
+  height: 60px;
+  border-radius: 100%;
+  transition: transform 0.3s ease;
+  box-shadow: rgb(0 0 0 / 87%) 0px 2px 4px, rgb(0 0 0 / 63%) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  padding: 0;
+
+  border: 1.5px solid var(--light-pink);
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.avatar-container:active {
+  transform: scale(0.95); /* Scale down on tap */
+}
+
+#progress-container {
+  height: 135px;
+  width: 150px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
