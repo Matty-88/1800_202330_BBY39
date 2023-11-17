@@ -43,6 +43,17 @@ function writeHikes() {
     });
 }
 
+function writeGoals(){
+    var goalsRef = db.collection("goals");
+    goalsRef.add({
+        duration: 5,
+        name: "billy",
+        target: 50000,
+    })
+}
+
+
+
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
