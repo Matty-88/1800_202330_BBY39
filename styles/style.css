@@ -11,17 +11,19 @@
   --light-pink: #fdecf7;
 }
 
- @font-face {
+@font-face {
   font-family: regular;
   src: url(/assets/fonts/Montserrat/static/Montserrat-Bold.ttf);
 }
-
 
 body {
   font-family: regular;
   color: var(--primary-color);
 }
 
+h1 {
+  color: var(--primary-color);
+}
 
 .primary-background {
   background-color: var(--pink);
@@ -52,8 +54,8 @@ body {
 footer {
   background-color: var(--primary-color);
   padding: 1.5rem;
-  border-top-left-radius: 4000px 150px;
-  border-top-right-radius: 4000px 150px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -62,3 +64,21 @@ footer {
 .font-size-17pt {
   font-size: 17pt;
 }
+
+.card-img-overlay {
+  background-color: #fbcee396;
+  color: #191a24;
+  border-radius: 20px;
+}
+
+.card-img {
+  border-radius: 20px;
+}
+
+.card {
+  border-radius: 20px;
+  border: none;
+  margin: 1rem;
+  min-height: 30%;
+}
+

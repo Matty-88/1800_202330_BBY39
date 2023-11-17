@@ -20,19 +20,25 @@ function getSpendings(userID){
 }
 
 function getNameFromAuth() {
-  firebase.auth().onAuthStateChanged((user) => {
+  firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
       
       var uid = user.uid;
       getSpendings(uid)
 
-      // ...
+      const querySnapshot = await db
+        .collection("goals")
+        .where("userIds", "array-contains", uid)
+        .where("isActive", "==", true)
+        .get();
+      querySnapshot.docs.map((doc) => console.log(doc.data()));
+
     } else {
-      // User is signed out
-      // ...
+      window.location.href = "login.html";
     }
   });
 }
 
-
 getNameFromAuth();
+
+
