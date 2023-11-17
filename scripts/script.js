@@ -14,12 +14,17 @@ function logout() {
     });
 }
 
+function getSpendings(userID){
+    db.collections('spendings')
+  
+}
+
 function getNameFromAuth() {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/v8/firebase.User
+      
       var uid = user.uid;
+      getSpendings(uid)
 
       // ...
     } else {
