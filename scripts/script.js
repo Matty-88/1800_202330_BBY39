@@ -17,23 +17,21 @@ function logout() {
 function getNameFromAuth() {
   firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/v8/firebase.User
       var uid = user.uid;
-      console.log("uid", uid);
+
       const querySnapshot = await db
         .collection("goals")
-        .where("userIds", "array-contains", uid).get()
+        .where("userIds", "array-contains", uid)
+        .where("isActive", "==", true)
+        .get();
+      querySnapshot.docs.map((doc) => console.log(doc.data()));
 
-      if (querySnapshot.size > 0) {
-        console.log(querySnapshot.docs());
-      }
-      // ...
     } else {
-      // User is signed out
-      // ...
+      window.location.href = "login.html";
     }
   });
 }
 
 getNameFromAuth();
+
+
