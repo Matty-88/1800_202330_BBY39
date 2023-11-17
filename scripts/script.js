@@ -1,4 +1,4 @@
-function sayHello() {}
+function sayHello() { }
 //sayHello();
 
 function logout() {
@@ -14,24 +14,36 @@ function logout() {
     });
 }
 
-function getSpendings(userID){
-    db.collections('spendings')
-  
+function getSpendings(userID, goalID) {
+  db.collection('spendings')
+    .where('userId', '==', userID).where('goalID', '==', goalID).get()
+    .then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        // Handle each spending document
+        const spendingData = doc.data();
+        console.log('Spending Data:', spendingData);
+      });
+    })
+
+
 }
 
 function getNameFromAuth() {
   firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
-      
+
       var uid = user.uid;
-      getSpendings(uid)
+
 
       const querySnapshot = await db
         .collection("goals")
         .where("userIds", "array-contains", uid)
         .where("isActive", "==", true)
         .get();
-      querySnapshot.docs.map((doc) => console.log(doc.data()));
+      //querySnapshot.docs[0]
+      const goalID = querySnapshot.docs[0].id;
+      console.log(uid);
+      getSpendings(uid, goalID)
 
     } else {
       window.location.href = "login.html";
