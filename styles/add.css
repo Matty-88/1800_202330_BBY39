@@ -16,11 +16,11 @@
 }
 
 .border-bottom {
-    border-bottom: 1.3px solid rgb(174, 174, 174);
+  border-bottom: 1.3px solid rgb(174, 174, 174);
 }
 
 small {
-    font-size: 8pt !important;
+  font-size: 8pt !important;
 }
 
 .swiper {
@@ -37,15 +37,36 @@ small {
   align-items: center;
 }
 
-.swiper-slide button.avatar {
+.swiper-slide button.btns {
   background-color: #fdecf7;
   color: #f88abd;
-  border-radius: 100%;
+  border-radius: 10px;
   border: none;
   font-weight: 600;
   font-size: 12pt;
   width: 100%;
-  padding: .3rem 0rem;
-  margin-left: .3rem;
+  padding: 0.3rem 0rem;
+  margin-left: 0.3rem;
+}
+
+.swiper-slide img.avatar {
+  border-radius: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.swiper-slide:has(img) {
+  border-radius: 100%;
+}
+
+.avatar-clicked {
+  border: 4px solid pink;
+  
+}
+
+.amount-clicked {
+    border: 2px solid pink !important;
+    background-color: #e08db4 !important;
+    color: #fdecf7 !important;
 
 }
