@@ -2,6 +2,7 @@ var goal;
 var goalID;
 var userId;
 var userView = true;
+var user;
 
 function logout() {
   firebase
@@ -94,6 +95,8 @@ function getSpendings() {
     });
 }
 
+
+
 // Function to fetch the user's active goal
 const getGoal = async () => {
   const querySnapshot = await db
@@ -112,6 +115,7 @@ const getGoal = async () => {
     document.getElementById("total").innerText = goal?.target + "$";
   }
 };
+
 
 // Function to update the circular progress bar
 const getGoalPersentage = (latestSpending) => {
@@ -217,6 +221,57 @@ function getDetails() {
     }
   });
 }
+
+async function addSpending() {
+  // Get the Dollar amount 
+  var dollarAmount = document.getElementById('dollar-amount').value;
+  // Get the item description
+  var itemDescription = document.getElementById('item-description').value;
+
+
+  var spendingsRef = db.collection('spendings');
+
+  try {
+
+
+    // Fetch spendings data for the friend
+
+    var runningTotal;
+
+    await db.collection("spendings")
+      .where("userId", "==", userId)
+      .where("goalID", "==", goalID)
+      .limit(1)
+      .get()
+      .then((querySnapshot) => {
+        if (querySnapshot) {
+          runningTotal = querySnapshot?.docs[0]?.data()?.runningTotal - dollarAmount
+        } else {
+          runningTotal = (user?.spendingMax * goal?.duration) - dollarAmount;
+        }
+      });
+  } catch (error) {
+    console.error("Error getting documents:", error);
+  }
+
+  console.log(runningTotal);
+
+  spendingsRef.add({
+    amount: dollarAmount,
+    description: itemDescription,
+    goalID: goalID,
+    userID: userId,
+    date: new Date(),
+    runningTotal: runningTotal
+
+
+  })
+
+}
+
+
+
+
 
 // Initialize the page by getting user details
 getDetails();
