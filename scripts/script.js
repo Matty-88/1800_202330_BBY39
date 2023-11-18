@@ -2,6 +2,7 @@ var goal;
 var goalID;
 var userId;
 var userView = true;
+var user;
 
 function logout() {
   firebase
@@ -65,6 +66,7 @@ const onClickFriends = async () => {
         if (querySnapshot) {
           // Update progress bar based on friend's spending data
           getGoalPersentage(querySnapshot?.docs[0]?.data()?.runningTotal ?? 0);
+         
           // Toggle userView for the next click
           userView = !userView;
         }
@@ -201,6 +203,7 @@ function triggerConfetti() {
 function getDetails() {
   firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
+      user = user;
       userId = user.uid;
       document.getElementById("avatar").src = "/assets/images/avatar.jpg";
       document.getElementById("avatar-text").innerText = "Others:";

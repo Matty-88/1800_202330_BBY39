@@ -21,13 +21,23 @@
   src: url(/assets/fonts/Montserrat/static/Montserrat-Bold.ttf);
 }
 
+@font-face {
+  font-family: semiBold;
+  src: url(/assets/fonts/Montserrat/static/Montserrat-SemiBold.ttf);
+}
+
 body {
   font-family: regular;
   color: var(--primary-color);
+  padding-bottom: 30% ;
 }
 
 .bold {
   font-family: bold;
+}
+
+.semiBold {
+  font-family: semiBold;
 }
 
 h1 {

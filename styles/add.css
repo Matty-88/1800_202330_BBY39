@@ -1,0 +1,51 @@
+.btn-rounded {
+  border-radius: 100%;
+  background-color: #f68dbe;
+  border: none;
+  font-size: 20px;
+}
+
+.btn-rounded:hover {
+  border-radius: 100%;
+  background-color: #ae4777;
+}
+
+.btn-rounded:active {
+  border-radius: 100%;
+  background-color: #ae4777 !important;
+}
+
+.border-bottom {
+    border-bottom: 1.3px solid rgb(174, 174, 174);
+}
+
+small {
+    font-size: 8pt !important;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide button.avatar {
+  background-color: #fdecf7;
+  color: #f88abd;
+  border-radius: 100%;
+  border: none;
+  font-weight: 600;
+  font-size: 12pt;
+  width: 100%;
+  padding: .3rem 0rem;
+  margin-left: .3rem;
+
+}
