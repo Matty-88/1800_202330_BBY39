@@ -86,9 +86,10 @@ footer {
 }
 
 .card-img-overlay {
-  background-color: #fbcee396;
+  background-color: var(--pink);
   color: #191a24;
   border-radius: 20px;
+  min-height: 316px;
 }
 
 .card-img {
@@ -99,7 +100,9 @@ footer {
   border-radius: 20px;
   border: none;
   margin: 1rem;
-  min-height: 30%;
+  min-height: 316px;
+
+  /* min-height: 30%; */
 }
 
 .avatar-container {
@@ -132,4 +135,9 @@ footer {
   align-items: center;
   display: flex;
   justify-content: center;
+}
+
+
+#modal {
+  border: none;
 }

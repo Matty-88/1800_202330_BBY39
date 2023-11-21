@@ -1,0 +1,36 @@
+.avatar {
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 100%;
+}
+
+.back-color {
+  background-color: #fbcee3;
+  padding-top: 3rem;
+}
+
+.center-ele {
+  margin-bottom: -8.8rem;
+}
+
+.border-top {
+  margin-top: 9rem;
+  padding: 1rem;
+}
+
+.logout-btn {
+  position: absolute;
+  bottom: 90px;
+  padding: 1rem;
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.edit-btn {
+    border-radius: 10px;
+}
