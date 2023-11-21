@@ -58,10 +58,15 @@ const onClickFriends = async () => {
         .get()
         .then((querySnapshot) => {
           if (querySnapshot) {
-            console.log(querySnapshot?.docs);
+            console.log(querySnapshot?.docs[0]?.data()?.runningTotal ?? 0);
             // Update progress bar based on friend's spending data
             getGoalPersentage(
-              querySnapshot?.docs[0]?.data()?.runningTotal ?? 0,
+              querySnapshot?.docs[0]?.data()?.runningTotal
+                ? querySnapshot?.docs[0]?.data()?.runningTotal
+                : userId === friendid &&
+                  !querySnapshot?.docs[0]?.data()?.runningTotal
+                ? userDetails?.spendingMax * goal?.duration
+                : 0,
 
               (persentage) => {
                 if (
@@ -232,10 +237,10 @@ const getGoalPersentage = (latestSpending, func) => {
     // Set style for the progress bar text
     bar.text.style.fontSize = "2rem";
 
-    // console.log(percentage)
-
     // Animate the progress bar to the calculated percentage
-    bar.animate(percentage > 100 ? 100 / 100 : percentage / 100);
+    bar.animate(
+      percentage > 100 ? 100 / 100 : percentage < 0 ? 0 / 100 : percentage / 100
+    );
     const line = func(percentage);
     line ? (document.getElementById("line").innerText = line) : "";
     // Re-enable click events on the avatar container

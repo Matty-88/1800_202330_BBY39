@@ -20,7 +20,9 @@ myForm.addEventListener("submit", async function (event) {
   const fixedExpense = +document.getElementById("fixedExpense").value;
   const income = +document.getElementById("incomeInput").value;
   const amount = +document.getElementById("amount").innerHTML;
-  if (fixedExpense > 0 && income > 0 && collaporator && amount > 0) {
+  
+  //check if all the values in the form are filled
+  if (fixedExpense > 0 && income > 0 && collaporator && amount > 0) { 
     const userRef = db.collection("users").doc(userId);
    await userRef.update({
       fixedExpense,
@@ -113,7 +115,6 @@ const getAllUsers = () => {
 
           listDiv.appendChild(slide);
         } else {
-          console.log(doc.data());
           document.getElementById("fixedExpense").value =
             doc.data()?.fixedExpense;
           document.getElementById("incomeInput").value = doc.data()?.income;
