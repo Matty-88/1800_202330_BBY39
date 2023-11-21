@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <title>MoneyMate</title>
   <meta name="comp1800 template" content="My 1800 App" />
@@ -34,7 +35,8 @@
   <script src="https://www.gstatic.com/firebase/8.10.1/firebase-storage.js"></script>
 
   <!-- Link to styles of your own -->
-  <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+  
+  <link rel="stylesheet" href="./styles/index.css">
 </head>
 
 <body>
@@ -42,49 +44,31 @@
   <!-- Your HTML Layout go here -->
   <!------------------------------>
   <!-- Stuff for body goes here -->
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">MoneyMate</a>
-      <img src="./images/MoneyMate.png" width="50" alt="logo" />
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <img id="login-pig" src="./assets/images/pig.png" alt="" height="60px" width="60px">
   </nav>
 
   <div class="container">
-    <h1>Let's Login!</h1>
+    <br>
+    <br>
+    
   </div>
   <div id="firebaseui-auth-container"></div>
   <div id="loader">Loading...</div>
   </div>
 
 
-  <footer class="container py-5">
-    <div class="row">
-      <div class="col-12 col-md">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-          stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img"
-          viewBox="0 0 24 24" data-darkreader-inline-stroke="" style="--darkreader-inline-stroke: currentColor">
-          <title>Product</title>
-          <circle cx="12" cy="12" r="10"></circle>
-          <path
-            d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94">
-          </path>
-        </svg>
-        <small class="d-block mb-3 text-muted">© 2023</small>
-      </div>
 
-
-
-    </div>
-  </footer>
   <!---------------------------------------------->
   <!-- Your own JavaScript functions go here    -->
   <!---------------------------------------------->
   <script src="./scripts/firebaseAPI_BBY39.js"></script>
   <script src="./scripts/skeleton.js"></script>
   <script src="./scripts/authentication.js"></script>
+  <script src="./scripts/login.js"></script>
 
   <!-- Link to scripts of your own -->
   <!-- <script src="./scripts/script.js"></script> -->

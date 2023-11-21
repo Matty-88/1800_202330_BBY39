@@ -32,4 +32,13 @@ body {
   border-radius: 50px;
 }
 
+.container-fluid {
+  background-color: #eec1e0;
+}
+
+.navbar {
+  padding: 0px;
+  margin: 0px;
+}
+
 
