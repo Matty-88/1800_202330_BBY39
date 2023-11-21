@@ -10,49 +10,80 @@ var swiper = new Swiper(".mySwiper", {
 var collaporator;
 var userDetails;
 var userId;
-// const onAddGoal = (event) => {
-//   event.preventDefault()
-//   console.log(collaporator)
-//   // console.log(firebase.auth().currentUser.uid)
-//
-// };
 
 var myForm = document.getElementById("form");
 
 // Add a submit event listener to the form
-myForm.addEventListener("submit", function (event) {
+myForm.addEventListener("submit", async function (event) {
   // Prevent the default form submission behavior
   event.preventDefault();
   const fixedExpense = +document.getElementById("fixedExpense").value;
   const income = +document.getElementById("incomeInput").value;
   const amount = +document.getElementById("amount").innerHTML;
-  console.log(fixedExpense > 0, income > 0, collaporator, amount > 0);
   if (fixedExpense > 0 && income > 0 && collaporator && amount > 0) {
     const userRef = db.collection("users").doc(userId);
-    userRef.update({
+   await userRef.update({
       fixedExpense,
       income,
       spendingMax: income - fixedExpense,
     });
+
+    await makeGoalsInactive();
+
     const obj = {
       name: document.getElementById("goalName").value,
       duration: document.getElementById("durationInput").value,
       target: amount,
       userIds: [userId, collaporator],
       winnerId: "",
+      date: new Date(),
       isActive: true,
     };
 
     db.collection("goals")
       .add(obj)
       .then(() => {
-        window.location.href = "main.html";
+        Swal.fire({
+          title: "Success!",
+          text: "A New Goal Is Successfully Added",
+          icon: "success",
+        }).then((ele) => {
+          window.location.href = "main.html";
+        });
       })
       .catch((error) => {
         console.log(error);
       });
   }
 });
+
+function makeGoalsInactive() {
+  // Use a batch to perform multiple writes as a single atomic operation
+  var batch = db.batch();
+
+  // Query for goals associated with the user
+
+  return db
+    .collection("goals")
+    .where("userIds", "array-contains", userId)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // For each goal document, update the 'active' field to false
+        var goalRef = db.collection("goals").doc(doc.id);
+        batch.update(goalRef, { isActive: false });
+      });
+
+      // Commit the batch update
+      return batch.commit();
+    })
+    .then(() => {
+      console.log("All goals made inactive for user:", userId);
+    })
+    .catch((error) => {
+      console.error("Error making goals inactive:", error);
+    });
+}
 
 const getAllUsers = () => {
   const query = db.collection("users");

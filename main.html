@@ -1,164 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>MoneyMate</title>
+    <meta name="comp1800 template" content="My 1800 App" />
 
-<head>
-  <title>MoneyMate</title>
-  <meta name="comp1800 template" content="My 1800 App" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap Library CSS CDN go here -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
 
-  <!-- Bootstrap Library CSS CDN go here -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+    <!-- Other libraries go here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/progressbar.js@1.0.1/dist/progressbar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.0.1"></script>
 
-  <!-- Other libraries go here -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/progressbar.js@1.0.1/dist/progressbar.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.0.1"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"
+    />
+    <!-- <script src="firebasejs/5.9.1/firebase-storage.js"></script>  -->
+    <!-- Link to styles of your own -->
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
 
-  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-  <!-- <script src="firebasejs/5.9.1/firebase-storage.js"></script>  -->
-  <!-- Link to styles of your own -->
-  <link rel="stylesheet" href="./styles/style.css" />
-</head>
+  <body>
+    <!------------------------------>
 
-<body>
-  <!------------------------------>
+    <!-- Your HTML Layout go here -->
+    <!------------------------------>
+    <!-- Stuff for body goes here -->
 
-  <!-- Your HTML Layout go here -->
-  <!------------------------------>
-  <!-- Stuff for body goes here -->
-  <div id="goal">
-    <div class="">
-      <div class="card bg-dark text-white position-relative">
-        <div>
-          <!-- <div style="height: 316px;"> </div> -->
-          <!-- <img class="card-img" src="assets/images/drink2.jpg" alt="Card image" height="316" /> -->
-        </div>
-        <div class="card-img-overlay d-flex justify-content-center flex-column">
-          <div class="d-flex justify-content-between">
-            <div>
-              <p id="goalName" class="bold"></p>
-            </div>
-            <div class="d-flex flex-row">
-              <p id="total" class="bold text-danger"></p>
-            </div>
-          </div>
-
-          <div class="row d-flex justify-content-center align-items-center mt-100">
-            <div class="d-flex justify-content-center align-items-center" id="center">
-              <p id="progress-text" class="m-0"></p>
-            </div>
-            <div id="progress-container"></div>
-            <!-- <div style="width: 30%" class="bg-info rounded-circle"> -->
-            <!-- </div> -->
-          </div>
-          <div>
-            <p class="mb-0 text-white" id="avatar-text"></p>
-
-            <div class="avatar-container" onclick="onClickFriends()">
-              <img src="" alt="User Avatar" class="avatar-image" id="avatar" />
-            </div>
-          </div>
-
-        </div>
+    <div id="loader">
+      <div class="text-center d-flex align-items-center justify-content-center flex-column">
+        <img
+          src="/assets/images/pig.png"
+          class="img"
+          width="140"
+          height="140"
+        />
+        <span class="sr-only">Loading...</span>
       </div>
     </div>
-    <div class="m-3 mt-4">
-      <h2 class="bold">Last Spending
 
+    <div id="placeholder" class="d-flex align-items-center flex-column d-none">
+      <img src="/assets/images/placeholder.svg" width="100%" height="100%" />
+      <p class="text-center semiBold">
+        Nothing Planned Yet. Ready to set some goals and make things happen?
+      </p>
+      <a href="add.html" class="btn btn-add btn-lg semiBold" role="button"
+        >Add Goal</a
+      >
+    </div>
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn" id="modal" data-toggle="modal" data-target="#exampleModalCenter">
-          <i class="bi bi-plus-circle-fill"></i>
-
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Add Expense</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+    <div id="conatiner" class="d-none">
+      <div id="goal">
+        <div class="">
+          <div class="card bg-dark text-white position-relative">
+            <div>
+              <!-- <div style="height: 316px;"> </div> -->
+              <!-- <img class="card-img" src="assets/images/drink2.jpg" alt="Card image" height="316" /> -->
+            </div>
+            <div
+              class="card-img-overlay d-flex justify-content-center flex-column"
+            >
+              <div class="d-flex justify-content-between">
+                <div>
+                  <p id="goalName" class="bold"></p>
+                </div>
+                <div class="d-flex flex-row">
+                  <p id="total" class="bold text-danger"></p>
+                </div>
               </div>
-              <div class="modal-body">
-                <form>
-                  <div class="form-group">
-                    <label for="formGroupExampleInput">Dollar Amount</label>
-                    
-                    <input type="text" class="form-control" id="dollar-amount" placeholder="$0">
-                  </div>
-                  <div class="form-group">
-                    <label for="formGroupExampleInput2">Item Description</label>
-                    <input type="text" class="form-control" id="item-description">
-                  </div>
-                </form>
+
+              <div
+                class="row d-flex justify-content-center align-items-center mt-100"
+              >
+                <div
+                  class="d-flex justify-content-center align-items-center"
+                  id="center"
+                >
+                  <p id="progress-text" class="m-0"></p>
+                </div>
+                <div id="progress-container"></div>
+                <div>
+                  <p id="line" class="text-center font-10 m-0 semiBold"></p>
+                </div>
+                <!-- <div style="width: 30%" class="bg-info rounded-circle"> -->
+                <!-- </div> -->
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button onclick="addSpending()" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+              <div>
+                <p class="mb-0 text-white" id="avatar-text"></p>
+
+                <div class="avatar-container" onclick="onClickFriends()">
+                  <img
+                    src=""
+                    alt="User Avatar"
+                    class="avatar-image"
+                    id="avatar"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-        </button>
-      </h2>
+        <div class="mx-3 ">
+          <div class="d-flex align-items-center justify-content-between py-2 mt-3">
+            <h2 class="bold mt-3">Last Spending</h2>
+
+            <!-- Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-add-icon btn-light"
+              id="modal"
+              data-toggle="modal"
+              
+              data-target="#exampleModalCenter"
+            >
+            <i class="bi bi-plus-lg"></i>            </button>
+          </div>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModalCenter"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">
+                    Add Expense
+                  </h5>
+                  <button
+                    type="button"
+                    class="close btn btn-secondary"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="formGroupExampleInput2">Description</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="item-description"
+                        autocomplete="off"
+                      />
+                    </div>
+
+                    <div class="form-group mt-3">
+                      <label for="formGroupExampleInput">Dollar Amount</label>
+
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="dollar-amount"
+                        placeholder="$0"
+                      />
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    onclick="addSpending()"
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                  >
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <canvas
+        id="confetti-canvas"
+        style="
+          display: none;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 100;
+        "
+      ></canvas>
+
+      <div class="list-group"></div>
     </div>
-  </div>
-  <canvas id="confetti-canvas" style="
-        display: none;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 100;
-      "></canvas>
 
-  <div class="list-group">
-   
-  </div>
+    <div id="footer"></div>
+    <!---------------------------------------------->
+    <!-- Your own JavaScript functions go here    -->
+    <!---------------------------------------------->
+    <script src="./scripts/firebaseAPI_BBY39.js"></script>
+    <script src="./scripts/skeleton.js"></script>
+    <!-- <script src="./scripts/authentication.js"></script> -->
 
-  <div id="footer"></div>
-  <!---------------------------------------------->
-  <!-- Your own JavaScript functions go here    -->
-  <!---------------------------------------------->
-  <script src="./scripts/firebaseAPI_BBY39.js"></script>
-  <script src="./scripts/skeleton.js"></script>
-  <!-- <script src="./scripts/authentication.js"></script> -->
+    <script src="./scripts/script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
-  <script src="./scripts/script.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-
-  <!-- Link to scripts of your own -->
-  <!-- <script src="./scripts/script.js"></script> -->
-</body>
-
+    <!-- Link to scripts of your own -->
+    <!-- <script src="./scripts/script.js"></script> -->
+  </body>
 </html>

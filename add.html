@@ -36,6 +36,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -94,8 +95,8 @@
             <div
               class="d-flex align-items-center flex-row justify-content-center"
             >
-              <p class="m-0" id="amount"></p>
-              <p class="mb-0">$</p>
+              <p class="m-0 text-success bold " id="amount"></p>
+              <p class="mb-0 text-success bold">$</p>
             </div>
             <button
               type="button"
@@ -106,44 +107,44 @@
             </button>
           </div>
         </div>
-        <div class="swiper mySwiper my-3">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
+        <div class=" my-3">
+          <div class="d-flex align-items-center flex-row flex-wrap">
+            <div class="swiper-slider">
               <button class="btns" onclick="onChangeAmount(100)" id="100">
                 $100
               </button>
             </div>
-            <div class="swiper-slide">
+            <div class="swiper-slider">
               <button class="btns" onclick="onChangeAmount(150)" id="150">
                 $150
               </button>
             </div>
-            <div class="swiper-slide">
+            <div class="swiper-slider">
               <button class="btns" onclick="onChangeAmount(200)" id="200">
                 $200
               </button>
             </div>
-            <div class="swiper-slide">
+            <div class="swiper-slider">
               <button class="btns" onclick="onChangeAmount(250)" id="250">
                 $250
               </button>
             </div>
-            <div class="swiper-slide">
+            <div class="swiper-slider">
               <button class="btns" onclick="onChangeAmount(300)" id="300">
                 $300
               </button>
             </div>
-            <div class="swiper-slide">
+            <div class="swiper-slider">
               <button class="btns" onclick="onChangeAmount(400)" id="400">
                 $400
               </button>
             </div>
-            <div class="swiper-slide">
+            <div class="swiper-slider">
               <button class="btns" onclick="onChangeAmount(500)" id="500">
                 $500
               </button>
             </div>
-            <div class="swiper-slide">
+            <div class="swiper-slider">
               <button class="btns" onclick="onChangeAmount(1000)" id="1000">
                 $1000
               </button>

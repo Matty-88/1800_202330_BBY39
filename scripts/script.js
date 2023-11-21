@@ -24,7 +24,7 @@ const onClickFriends = async () => {
       avatar.src = "/assets/images/me.jpg";
       avatarText.innerText = "Me:";
       background.style.backgroundColor = "rgb(170 180 237 / 69%)";
-      text.innerText = "Your Partner saved:";
+      text.innerText = "Your Friend saved:";
     } else {
       // Show "Other" view
       avatar.src = "/assets/images/avatar.jpg";
@@ -42,18 +42,42 @@ const onClickFriends = async () => {
       ? goal?.userIds?.find((ele) => ele !== userId)
       : userId;
 
+    console.log(
+      goal?.userIds?.find((ele) => ele !== userId),
+      userId
+    );
+    console.log(friendid);
+    console.log(goalID);
+
     try {
       // Fetch spendings data for the friend
       db.collection("spendings")
-        .where("userId", "==", friendid)
+        .where("userID", "==", friendid)
         .where("goalID", "==", goalID)
-        .limit(1)
+        // .limit(1)
         .get()
         .then((querySnapshot) => {
           if (querySnapshot) {
+            console.log(querySnapshot?.docs);
             // Update progress bar based on friend's spending data
             getGoalPersentage(
-              querySnapshot?.docs[0]?.data()?.runningTotal ?? 0
+              querySnapshot?.docs[0]?.data()?.runningTotal ?? 0,
+
+              (persentage) => {
+                if (
+                  persentage === 100 ||
+                  (persentage > 100 && userId === friendid)
+                ) {
+                  return "You have enough money for your goal, dont spend it!";
+                } else if (persentage < 100 && userId === friendid) {
+                  return "Try to spend less money, so you can achieve your goal";
+                } else if (
+                  persentage === 100 ||
+                  (persentage > 100 && userId !== friendid)
+                ) {
+                  return "Your friend is saving enough money to win the goal";
+                }
+              }
             );
 
             // Toggle userView for the next click
@@ -78,41 +102,50 @@ function getSpendings() {
           // Update progress bar based on user's spending data
           getGoalPersentage(
             querySnapshot?.docs[0]?.data()?.runningTotal ??
-              userDetails?.spendingMax * goal?.duration          );
+              userDetails?.spendingMax * goal?.duration,
 
+            (persentage) => {
+              if (persentage === 100 || persentage > 100) {
+                return "You have enough money for your goal, don't spend it!";
+              } else if (persentage < 100) {
+                return "Try to spend less money, so you can achieve your goal";
+              }
+            }
+          );
           const list = document.getElementsByClassName("list-group")[0];
-          list.innerHTML = ''
-          querySnapshot.docs.forEach((doc) => {
-            // Handle each spending document
-            const div = document.createElement("div");
-            div.className =
-              "list-group-item list-group-item-action d-flex flex-row align-items-center justify-content-between";
-            const p1 = document.createElement("p");
-            const p2 = document.createElement("p");
+          list.innerHTML = "";
 
-            p1.innerText = doc.data().description;
-            p2.innerText = doc.data().amount + "$";
+          if (querySnapshot?.docs[0]?.data()) {
+            querySnapshot.docs.forEach((doc) => {
+              // Handle each spending document
+              const div = document.createElement("div");
+              div.className =
+                "list-group-item list-group-item-action d-flex flex-row align-items-center justify-content-between";
+              const p1 = document.createElement("p");
+              const p2 = document.createElement("p");
 
-            div.appendChild(p1);
-            div.appendChild(p2);
+              p1.innerText = doc.data().description;
+              p2.innerText = doc.data().amount + "$";
+              p2.style.color = "red";
 
-            list.appendChild(div);
-            // Use spendingData as needed
-          });
+              div.appendChild(p1);
+              div.appendChild(p2);
+
+              list.appendChild(div);
+              // Use spendingData as needed
+            });
+          } else {
+            const list = document.getElementsByClassName("list-group")[0];
+
+            const p = document.createElement("p");
+            p.innerText = "No Spendings Yet!";
+            p.className = "text-center text-secondary mt-3";
+            list.appendChild(p);
+          }
         }
       });
-  } else {
-    const list = document.getElementsByClassName("list-group")[0];
-    
-    document.getElementById("modal").disabled = true;
-
-
-    const p = document.createElement("p");
-    p.innerText = "No Spendings Yet!";
-    p.className = "text-center text-secondary mt-3"
-    list.appendChild(p)
   }
-} 
+}
 
 // Function to fetch the user's active goal
 const getGoal = async () => {
@@ -132,11 +165,24 @@ const getGoal = async () => {
 
     text.innerText = "You've saved:";
     text.style.fontWeight = 600;
+
     // Update goal-related DOM elements
     const goalName = document.getElementById("goalName");
     goalName.innerText = goal?.name;
     goalName.style.fontSize = "22pt";
-    document.getElementById("total").innerText = goal?.target + "$";
+    var targetDate = new Date(goal?.date);
+    targetDate.setMonth(targetDate.getMonth() + goal?.duration);
+
+    // Get the current date
+    var currentDate = new Date();
+
+    // Check if today is beyond the target date
+    if (currentDate > targetDate) {
+      document.getElementById("total").innerText =
+        "Unfortunately, your set duration has passed.";
+    } else {
+      document.getElementById("total").innerText = goal?.target + "$";
+    }
   } else {
     document.getElementById("avatar").src = "/assets/images/avatar.jpg";
 
@@ -151,15 +197,16 @@ const getGoal = async () => {
 };
 
 // Function to update the circular progress bar
-const getGoalPersentage = (latestSpending) => {
+const getGoalPersentage = (latestSpending, func) => {
   const target = goal?.target;
   const runningTotal = latestSpending;
   document.getElementById("progress-container").innerHTML = "";
 
   if (target) {
     // Calculate percentage
-    console.log((runningTotal / target) * 100 , runningTotal , target)
-    const percentage =   (runningTotal / target) * 100 ;
+    document.getElementById("line").innerHTML = "";
+    console.log((runningTotal / target) * 100, runningTotal, target);
+    const percentage = (runningTotal / target) * 100;
 
     // Create a new circular progress bar instance
     var bar = new ProgressBar.Circle("#progress-container", {
@@ -178,7 +225,7 @@ const getGoalPersentage = (latestSpending) => {
 
         // Update the text inside the progress bar based on the current value
         var value = Math.round(circle?.value() * 100);
-        circle.setText(  value + "%" );
+        circle.setText(value + "%");
       },
     });
 
@@ -188,9 +235,9 @@ const getGoalPersentage = (latestSpending) => {
     // console.log(percentage)
 
     // Animate the progress bar to the calculated percentage
-    console.log(percentage)
-    bar.animate(percentage / 100);
-
+    bar.animate(percentage > 100 ? 100 / 100 : percentage / 100);
+    const line = func(percentage);
+    line ? (document.getElementById("line").innerText = line) : "";
     // Re-enable click events on the avatar container
     document.getElementsByClassName("avatar-container")[0].style.pointerEvents =
       "auto";
@@ -265,6 +312,14 @@ function getDetails() {
       await getUserDetails();
       await getGoal();
       await getSpendings();
+      if (goalID) {
+        document.getElementById("conatiner").classList.remove("d-none");
+        document.getElementById("placeholder").classList.add("d-none");
+      } else {
+        document.getElementById("conatiner").classList.add("d-none");
+        document.getElementById("placeholder").classList.remove("d-none");
+      }
+      document.getElementById("loader").classList.add("d-none");
     } else {
       window.location.href = "login.html";
     }
@@ -291,7 +346,6 @@ async function addSpending() {
       .limit(1)
       .get()
       .then((querySnapshot) => {
-
         if (querySnapshot && querySnapshot?.docs[0]?.data()) {
           runningTotal =
             +querySnapshot?.docs[0]?.data()?.runningTotal - +dollarAmount;
@@ -306,7 +360,7 @@ async function addSpending() {
 
   spendingsRef
     .add({
-      amount: dollarAmount,
+      amount: +dollarAmount,
       description: itemDescription,
       goalID: goalID,
       userID: userId,
@@ -316,6 +370,7 @@ async function addSpending() {
     .then((ele) => {
       var modal = document.getElementById("exampleModalCenter");
       // modal.style.display = "none";
+
       var modalBackdrop = document.getElementsByClassName("modal-backdrop");
       console.log(modalBackdrop);
       for (var i = 0; i < modalBackdrop.length; i++) {

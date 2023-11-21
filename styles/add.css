@@ -37,7 +37,13 @@ small {
   align-items: center;
 }
 
-.swiper-slide button.btns {
+.swiper-slider {
+  margin: 0.3rem .6rem ;
+
+}
+
+
+.swiper-slider button.btns {
   background-color: #fdecf7;
   color: #f88abd;
   border-radius: 10px;
@@ -45,8 +51,7 @@ small {
   font-weight: 600;
   font-size: 12pt;
   width: 100%;
-  padding: 0.3rem 0rem;
-  margin-left: 0.3rem;
+  padding: .3rem 1rem;
 }
 
 .swiper-slide img.avatar {
