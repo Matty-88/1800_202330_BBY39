@@ -42,12 +42,7 @@ const onClickFriends = async () => {
       ? goal?.userIds?.find((ele) => ele !== userId)
       : userId;
 
-    console.log(
-      goal?.userIds?.find((ele) => ele !== userId),
-      userId
-    );
-    console.log(friendid);
-    console.log(goalID);
+
 
     try {
       // Fetch spendings data for the friend
@@ -58,7 +53,6 @@ const onClickFriends = async () => {
         .get()
         .then((querySnapshot) => {
           if (querySnapshot) {
-            console.log(querySnapshot?.docs[0]?.data()?.runningTotal ?? 0);
             // Update progress bar based on friend's spending data
             getGoalPersentage(
               querySnapshot?.docs[0]?.data()?.runningTotal
@@ -105,9 +99,10 @@ function getSpendings() {
       .then((querySnapshot) => {
         if (querySnapshot) {
           // Update progress bar based on user's spending data
+          // console.log(querySnapshot?.docs[querySnapshot?.docs?.length - 1]?.data())
           getGoalPersentage(
-            querySnapshot?.docs[0]?.data()?.runningTotal ??
-              userDetails?.spendingMax * goal?.duration,
+            querySnapshot?.docs[querySnapshot?.docs?.length - 1]?.data()
+              ?.runningTotal ?? userDetails?.spendingMax * goal?.duration,
 
             (persentage) => {
               if (persentage === 100 || persentage > 100) {
@@ -175,19 +170,6 @@ const getGoal = async () => {
     const goalName = document.getElementById("goalName");
     goalName.innerText = goal?.name;
     goalName.style.fontSize = "22pt";
-    var targetDate = new Date(goal?.date);
-    targetDate.setMonth(targetDate.getMonth() + goal?.duration);
-
-    // Get the current date
-    var currentDate = new Date();
-
-    // Check if today is beyond the target date
-    if (currentDate > targetDate) {
-      document.getElementById("total").innerText =
-        "Unfortunately, your set duration has passed.";
-    } else {
-      document.getElementById("total").innerText = goal?.target + "$";
-    }
   } else {
     document.getElementById("avatar").src = "/assets/images/avatar.jpg";
 
@@ -210,7 +192,6 @@ const getGoalPersentage = (latestSpending, func) => {
   if (target) {
     // Calculate percentage
     document.getElementById("line").innerHTML = "";
-    console.log((runningTotal / target) * 100, runningTotal, target);
     const percentage = (runningTotal / target) * 100;
 
     // Create a new circular progress bar instance
@@ -238,6 +219,7 @@ const getGoalPersentage = (latestSpending, func) => {
     bar.text.style.fontSize = "2rem";
 
     // Animate the progress bar to the calculated percentage
+
     bar.animate(
       percentage > 100 ? 100 / 100 : percentage < 0 ? 0 / 100 : percentage / 100
     );
@@ -247,9 +229,36 @@ const getGoalPersentage = (latestSpending, func) => {
     document.getElementsByClassName("avatar-container")[0].style.pointerEvents =
       "auto";
 
-    // Trigger confetti if the goal is reached
-    if (percentage === 100 && hasSpendings) {
-      triggerConfetti();
+    var targetDate = new Date(goal?.date?.seconds * 1000 + goal?.date?.nanoseconds / 1000000);
+    
+    targetDate.setMonth(targetDate.getMonth() + +goal?.duration)
+
+
+
+
+
+
+    // Get the current date
+    var currentDate = new Date();
+
+
+    // Check if today is beyond the target date
+    if (currentDate > targetDate) {
+      // Trigger confetti if the goal is reached
+      if (percentage >= 100) {
+        triggerConfetti();
+        const total = document.getElementById("total");
+
+        total.innerText =
+          "You Won";
+        total.classList.remove("text-danger");
+          document.getElementById("total").style.color = 'green';
+      } else {
+        document.getElementById("total").innerText =
+          "Unfortunately, You Lost.";
+      }
+    } else {
+      document.getElementById("total").innerText = goal?.target + "$";
     }
   }
 };
@@ -312,7 +321,6 @@ function getDetails() {
   firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
       userId = user.uid;
-
       // Fetch user's goal and spendings data
       await getUserDetails();
       await getGoal();
@@ -352,8 +360,10 @@ async function addSpending() {
       .get()
       .then((querySnapshot) => {
         if (querySnapshot && querySnapshot?.docs[0]?.data()) {
+
           runningTotal =
-            +querySnapshot?.docs[0]?.data()?.runningTotal - +dollarAmount;
+            +querySnapshot?.docs[querySnapshot?.docs?.length - 1]?.data()
+              ?.runningTotal - +dollarAmount;
         } else {
           runningTotal =
             +userDetails?.spendingMax * +goal?.duration - +dollarAmount;
@@ -377,7 +387,6 @@ async function addSpending() {
       // modal.style.display = "none";
 
       var modalBackdrop = document.getElementsByClassName("modal-backdrop");
-      console.log(modalBackdrop);
       for (var i = 0; i < modalBackdrop.length; i++) {
         modalBackdrop[i].classList.remove("show");
 

@@ -49,6 +49,7 @@ myForm.addEventListener("submit", function (event) {
     ...userDetails,
     income: document.getElementById("income").value,
     fixedExpense: document.getElementById("expense").value,
+    spendingMax: document.getElementById("income").value - document.getElementById("expense").value
   };
   userRef
     .update(obj)
